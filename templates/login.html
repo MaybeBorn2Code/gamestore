@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <title>{{ title }}</title>
+</head>
+<body>
+<div class="title">
+    <h2>Welcome to admin panel!</h2>
+</div>
+<p><a href="game_create">Add a new game!</a></p>
+<p><a href="genre_create">Add a new genre!</a></p>
+<p><a href="user_create">Add a new user!</a></p>
+<p><a href="user_login">Login as user</a></p>
+<div class="main">
+<div class="first">
+  <table>
+<colgroup>
+  <col span="8" style="background:Khaki">
+</colgroup>
+<tr>
+  <th>id</th>
+  <th>Price</th>
+  <th>Game</th>
+  <th>Year</th>
+  <th>Genre</th>
+  <th>Description</th>
+  <th>Code</th>
+  <th>is_active</th>
+</tr>
+{% for j in select_all %}
+<tr>
+  <td>{{ j[0] }}</td>
+  <td>{{ j[1] }}</td>
+  <td>{{ j[2] }}</td>
+  <td>{{ j[3] }}</td>
+  <td>{{ j[4] }}</td>
+  <td>{{ j[5] }}</td>
+  <td>{{ j[6] }}</td>
+  <td>{{ j[7] }}</td>
+</tr>
+{% endfor %}
+</table>  
+</div>
+</div>
+</body>
+</html>

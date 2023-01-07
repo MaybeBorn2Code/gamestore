@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <title>User_create</title>
+</head>
+<body>
+<div class="title">
+    <h2>Add a user panel!</h2>
+</div>
+<p>Current table:</p>
+<hr>
+<div class="first_col">
+    <table>
+        <colgroup>
+          <col span="2" style="background:Khaki">
+          <col style="background-color:LightCyan">
+        </colgroup>
+        <tr>  
+          <th>id</th>
+          <th>Username</th>
+          <th>Balance</th>
+        </tr>
+        {% for j in select_from_data %}
+        <tr>
+          <td>{{ j[0] }}</td>
+          <td>{{ j[1] }}</td>
+          <td>{{ j[2] }}</td>
+        </tr>
+        {% endfor %}
+        </table>
+        <hr>
+    <form action="/user_create" method="post">
+        <p>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for msg in messages %}
+            <p style="color: red;">{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+        </p>
+        <input type="text" name="username" id="username" placeholder="Enter username">
+        <input type="text" name="balance" id="balance" placeholder="enter balance">
+        <br>
+        <input type="submit" name="add" id="add" value="add">
+    </form>   
+    <p><a href="/">Return to the main page!</a></p>   
+</body>
+</html>

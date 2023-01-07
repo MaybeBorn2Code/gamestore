@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <title>Store</title>
+</head>
+<body>
+<div class="title">
+    <h2>Welcome to game store v1.0</h2>
+    <p><a href="/">Return to the main page!</a></p>  
+</div>
+    <div class="main">
+        <p>Hello {{ user }}</p>
+        <p>Your balance is: {{ balance }}$</p>
+    </div>
+    <p>Select a game from table:</p>
+    <div class="game_col">
+        <table>
+            <colgroup>
+              <col span="3" style="background:Khaki">
+              <col style="background-color:LightCyan">
+            </colgroup>
+            <tr>  
+              <th>title</th>
+              <th>genre</th>
+              <th>description</th>
+              <th>price</th>
+            </tr>
+            {% for j in all_games %}
+            <tr>
+              <td>{{ j[0] }}</td>
+              <td>{{ j[1] }}</td>
+              <td>{{ j[2] }}</td>
+              <td>{{ j[3] }}</td>
+            </tr>
+            {% endfor %}
+            </table> 
+            <hr>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for msg in messages %}
+            <p style="color: rgb(255, 0, 0);">{{msg}}</p>
+            {% endfor %}
+            <hr>
+        {% endif %}
+        {% endwith %}  
+      <form action="/store" method="post">  
+      {% for i in games %} 
+      <input type="checkbox" id="game" name="game" value="{{i}}">
+      <label for="game">{{i}}</label>
+      <br>
+      {% endfor %}
+      <input type="submit" name="buy" id="buy" value="buy">
+      </form>
+</body>
+</html>

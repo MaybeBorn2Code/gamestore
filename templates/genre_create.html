@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <title>Genre_create</title>
+</head>
+<body>
+<div class="title">
+    <h2>Add a genre panel!</h2>
+</div>
+<p>Current table:</p>
+<hr>
+<div class="first_col">
+    <table>
+        <colgroup>
+          <col span="2" style="background:Khaki">
+          <col style="background-color:LightCyan">
+        </colgroup>
+        <tr>  
+          <th>id</th>
+          <th>Genre</th>
+          <th>Description</th>
+        </tr>
+        {% for j in select_from_data %}
+        <tr>
+          <td>{{ j[0] }}</td>
+          <td>{{ j[1] }}</td>
+          <td>{{ j[2] }}</td>
+        </tr>
+        {% endfor %}
+        </table>   
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for msg in messages %}
+            <p style="color: red;">{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <form action="/genre_create" method="post">
+        {% for i in new_genre %} 
+        <input type="checkbox" id="genre" name="name" value="{{i}}">
+        <label for="genre">{{i}}</label>
+        <br>
+        {% endfor %}
+        <input type="submit" name="add" id="add" value="add">
+        </form>
+    <p><a href="/">Return to the main page!</a></p>   
+</body>
+</html>

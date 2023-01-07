@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <title>Game_create</title>
+</head>
+<body>
+<div class="title">
+    <h2>Add a game panel!</h2>
+</div>
+<p>Current table:</p>
+<hr>
+<div class="first_col">
+    <table>
+        <colgroup>
+          <col span="2" style="background:Khaki">
+          <col style="background-color:LightCyan">
+        </colgroup>
+        <tr>  
+          <th>id</th>
+          <th>Title</th>
+          <th>year of production</th>
+        </tr>
+        {% for j in select_from_data %}
+        <tr>
+          <td>{{ j[0] }}</td>
+          <td>{{ j[1] }}</td>
+          <td>{{ j[2] }}</td>
+        </tr>
+        {% endfor %}
+        </table>   
+        <hr> 
+    <form action="/game_create" method="post">
+        <p>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for msg in messages %}
+            <p style="color: red;">{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+        </p>
+        <input type="text" name="title" id="title" placeholder="Game Title">
+        <input type="text" name="year" id="year" placeholder="Year of production">
+        <input type="text" name="price" id="price" placeholder="Set price for game in $">
+        <br><br>
+        {% for i in select_genre %}
+        <input type="checkbox" id="genre" name="name" value="{{i}}">
+        <label for="genre">{{i}}</label>
+        <br>
+        {% endfor %}
+        <input type="submit" name="add" id="add" value="add">
+    </form>
+    <p><a href="/">Return to the main page!</a></p>   
+</body>
+</html>

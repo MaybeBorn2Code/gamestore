@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <title>Store_Logon</title>
+</head>
+<body>
+<div class="title">
+    <h2>Welcome to game store v1.0</h2>
+    <p><a href="/">Return to the main page!</a></p>  
+</div>
+    <form action="/user_login" method="post">
+        <p>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for msg in messages %}
+            <p style="color: red;">{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+        </p>
+        <input type="text" name="username" id="username" placeholder="Enter username">
+        <br>
+        <input type="submit" name="enter" id="enter" value="enter">
+    </form>   
+</body>
+</html>
